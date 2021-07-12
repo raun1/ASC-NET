@@ -40,3 +40,11 @@ https://arxiv.org/pdf/2103.03664.pdf
 * [LiTS](https://competitions.codalab.org/competitions/17094) - LiTS Website
 * [MS-SEG 2015](https://smart-stats-tools.org/lesion-challenge) - MS-SEG2015 website
 * [12 gb TitanX]
+
+### Files Needed 
+
+To make the frame work function we require 2 files 
+- Reference Distribution - Named *good_dic_to_train_disc.npy* for our code 
+> This is the image set which we know something about. This forms a manifold.
+- Input Images - Named *input_for_generator.npy* for our code
+> These can contain any thing the framework will split it into two halves with one halves consisting of components of the input image in the manifold of the Reference distribution and the other being everything else/anomaly.
