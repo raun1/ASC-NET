@@ -44,7 +44,7 @@ https://arxiv.org/pdf/2103.03664.pdf
 ### Files Needed 
 
 To make the frame work function we require 2 files 
-- Reference Distribution - Named *good_dic_to_train_disc.npy* for our code 
+- Reference Distribution - Named ***good_dic_to_train_disc.npy*** for our code 
 > This is the image set which we know something about. This forms a manifold.
-- Input Images - Named *input_for_generator.npy* for our code
+- Input Images - Named ***input_for_generator.npy*** for our code
 > These can contain any thing the framework will split it into two halves with one halves consisting of components of the input image in the manifold of the Reference distribution and the other being everything else/anomaly.
