@@ -43,8 +43,12 @@ https://arxiv.org/pdf/2103.03664.pdf
 
 ### Files Needed 
 
-To make the frame work function we require 2 files 
+To make the frame work function we require 2 files [Mandatory!!!!]
 - Reference Distribution - Named ***good_dic_to_train_disc.npy*** for our code 
 > This is the image set which we know something about. This forms a manifold.
 - Input Images - Named ***input_for_generator.npy*** for our code
 > These can contain any thing the framework will split it into two halves with one halves consisting of components of the input image in the manifold of the Reference distribution and the other being everything else/anomaly.
+
+Ground truth for the anomaly we want to test for [Optional used during testing]
+-Masks - Named ***tumor_mask_for_generator.npy*** for our code
+> The framework is able to throw out anomaly without needing any guidance from a ground truth. However to check performance we may want to include a mask for anomalies of the input image set we use above. In real life scenarios we wont have these and we dont need these.
