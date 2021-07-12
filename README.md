@@ -41,7 +41,15 @@ https://arxiv.org/pdf/2103.03664.pdf
 * [MS-SEG 2015](https://smart-stats-tools.org/lesion-challenge) - MS-SEG2015 website
 * [12 gb TitanX]
 
-### Files Needed 
+### Code Summary [Short Video]
+
+To be completed
+
+[![Click for a short vid](img/YT.PNG)](https://www.youtube.com/watch?v=oUeBNOYOheg)
+
+
+
+### Data Files
 
 To make the frame work function we require 2 files [Mandatory!!!!]
 - Reference Distribution - Named ***good_dic_to_train_disc.npy*** for our code 
@@ -52,3 +60,20 @@ To make the frame work function we require 2 files [Mandatory!!!!]
 Ground truth for the anomaly we want to test for [Optional used during testing]
 -Masks - Named ***tumor_mask_for_generator.npy*** for our code
 > The framework is able to throw out anomaly without needing any guidance from a ground truth. However to check performance we may want to include a mask for anomalies of the input image set we use above. In real life scenarios we wont have these and we dont need these.
+
+### Source File 
+
+#### Initial Conditions
+
+- The framework is initialized with input shape 160x160x1 for MS-SEG experiments. Please update this accordingly
+
+#### File Sequence to Run
+
+- create_networks.py 
+> This creates the network mentioned in our paper. If you need a network with different architecture please edit this file accordingly and update the baseline structures of the encoder/decoder. Try to keep the final connections intact. 
+
+- continue_training_stage_1.py
+> Stage 1 training. Read the paper!
+
+-continue_training_stage_2.py
+> Stage 2 training. Read the paper!
