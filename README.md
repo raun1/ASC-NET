@@ -16,7 +16,7 @@ https://arxiv.org/pdf/2103.03664.pdf
 
 ### Network Architecture
 
-![alt text](img/ASCnet.PNG)
+![Network Architecture](img/ASCnet.PNG)
 
 ### High level Summary [Short Video]
 
@@ -41,10 +41,10 @@ https://arxiv.org/pdf/2103.03664.pdf
 * [MS-SEG 2015](https://smart-stats-tools.org/lesion-challenge) - MS-SEG2015 website
 * [12 gb TitanX]
 
-### Code Summary [Short Video]
+### Code Summary [Short Video. I havent yet commented the code so best if you watch this :>]
 
 
-[![Click for a short vid](img/YT.PNG)](https://www.youtube.com/watch?v=oUeBNOYOheg)
+[![Click for a short vid](img/YT.PNG)](https://www.youtube.com/watch?v=bkhRGjz_KfA)
 
 
 
@@ -86,3 +86,4 @@ https://arxiv.org/pdf/2103.03664.pdf
 
 ### Results 
 
+![Results](img/res.PNG)
