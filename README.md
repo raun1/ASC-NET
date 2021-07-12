@@ -1,10 +1,11 @@
- # ASC-NET [MICCAI 2021] https://arxiv.org/pdf/2103.03664.pdf
-
-
 ## ASC Net summary
 
 ### Introduction
 ASC-Net is a framework which allows us to <strong>define a Reference Distribution Set</strong> and then take in <strong>any Input Image</strong> and <strong>compare with the Reference Distribution</strong> and <strong>throw out anomalies</strong> present in the Input Image. 
+
+### Archive Link 
+
+https://arxiv.org/pdf/2103.03664.pdf
 
 ### Highlights
 
