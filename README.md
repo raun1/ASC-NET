@@ -64,7 +64,7 @@ https://arxiv.org/pdf/2103.03664.pdf
 
 #### Initial Conditions
 
-- The framework is initialized with input shape 160x160x1 for MS-SEG experiments. Please update this accordingly
+- The framework is initialized with input shape 160x160x1 for MS-SEG experiments. Please update this according to your needs.
 - Update the path variables for the folders in case you want to visualize the network output while training it
 - To change the base network please change the build_generator and build_discriminator methods
 
