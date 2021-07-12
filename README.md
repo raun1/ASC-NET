@@ -75,5 +75,5 @@ To be completed
 - continue_training_stage_1.py
 > Stage 1 training. Read the paper!
 
--continue_training_stage_2.py
+- continue_training_stage_2.py
 > Stage 2 training. Read the paper!
