@@ -1,7 +1,7 @@
 ## ASC Net summary
 
 ### Introduction
-ASC-Net is a framework which allows us to <strong>define a Reference Distribution Set</strong> and then take in <strong>any Input Image</strong> and <strong>compare with the Reference Distribution</strong> and <strong>throw out anomalies</strong> present in the Input Image. 
+ASC-Net is a framework which allows us to <strong>define a Reference Distribution Set</strong> and then take in <strong>any Input Image</strong> and <strong>compare with the Reference Distribution</strong> and <strong>throw out anomalies</strong> present in the Input Image. The kind of cases where this is useful is when you have some images/signals where you are aware of its contents and then you get a set of new images and you want to see if the new images differ from the original set aka anomaly/novelty detection.
 
 ### Archive Link 
 
@@ -10,9 +10,9 @@ https://arxiv.org/pdf/2103.03664.pdf
 ### Highlights
 
 1. Solves the difficulty in defining a class/set of things deterministically down to the nitty gritty details. The Reference Distribution can work on any combination of image set and abstract out the manifold encompassing them.
-2. No need of perfect reconstruction. We care about the anomaly not the reconstruction unlike other existing algorithms.
-3. We can potentially define any manifold using Reference Distribution and then compare any incoming input image to it.
-4. Works on any image sizes. Simply adjust the size of the encoder/decoder sets to match your input size and hardware capacity.
+2. No need of perfect reconstruction. We care about the anomaly not the reconstruction unlike other existing algorithms. State of the art performance!
+3. We can potentially define any manifold using Reference Distribution and then compare any incoming input image to it. 
+4. Works on any image sizes. Simply adjust the size of the encoder/decoder sets to match your input size and hardware capacity. 
 
 ### Network Architecture
 
