@@ -21,7 +21,7 @@ https://arxiv.org/pdf/2103.03664.pdf
 ### High level Summary 
 
 Click below for a short video explaining ASC-NET
-[![Click for a short vid](https://github.com/raun1/ASC-NET/blob/42f3192248cc67ac111ab51c198a4c0dc87064c8/img/yt_logo_rgb_light.png)](https://www.youtube.com/watch?v=oUeBNOYOheg)
+[![Click for a short vid](img/logo_yt.PNG)](https://www.youtube.com/watch?v=oUeBNOYOheg)
 
 *ROI and CO branches - 
 We take the downsampling branch of a U-Net as it is, however we split the upsampling branch into two halves, one to obtain the Region of Interest and the other for Complementary aka non region of interest. Losses here are negative dice for ROI and positive dice for Non-ROI region.*
