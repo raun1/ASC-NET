@@ -24,9 +24,9 @@ https://arxiv.org/pdf/2103.03664.pdf
 [![Click for a short vid](img/YT.PNG)](https://www.youtube.com/watch?v=oUeBNOYOheg)
 
 
-### Code
+## Code
 
-## Built With/Things Needed to implement experiments
+### Built With/Things Needed to implement experiments
 
 * [Python](https://www.python.org/downloads/) - Python-2 
 * [Keras](http://www.keras.io) - Deep Learning Framework used
