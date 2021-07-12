@@ -26,14 +26,16 @@ https://arxiv.org/pdf/2103.03664.pdf
 
 ## Code
 
-### Built With/Things Needed to implement experiments
+### Dependencies/Environment used
 
-* [Python](https://www.python.org/downloads/) - Python-2 
-* [Keras](http://www.keras.io) - Deep Learning Framework used
-* [Numpy](http://www.numpy.org/) - Numpy
-* [Sklearn](http://scikit-learn.org/stable/install.html) - Scipy/Sklearn/Scikit-learn
-* [CUDA](https://developer.nvidia.com/cuda-80-ga2-download-archive) - CUDA-8
-* [CUDNN](https://developer.nvidia.com/rdp/assets/cudnn_library-pdf-5prod) - CUDNN-5 You have to register to get access to CUDNN
+* [CUDA](https://developer.nvidia.com/cuda-90-download-archive) - CUDA-9.0.176
+* [CUDNN](https://developer.nvidia.com/cudnn-download-survey) - CUDNN- Major 6; Minor 0; PatchLevel 21 
+* [Python](https://www.python.org/downloads/) - Version 2.7.12 
+* [Tensorflow](https://www.tensorflow.org/install) - Version 1.10.0
+* [Keras](http://www.keras.io) - Version 2.2.2
+* [Numpy](http://www.numpy.org/) - Version 1.15.5
+* [Nibabel](https://nipy.org/nibabel/) - Version 2.2.0
+* [Open-CV](https://opencv.org/releases/) - Version 2.4.9.1
 * [Brats 2019](https://ipp.cbica.upenn.edu/) - Select Brats 2019
 * [LiTS](https://competitions.codalab.org/competitions/17094) - LiTS Website
 * [MS-SEG 2015](https://smart-stats-tools.org/lesion-challenge) - MS-SEG2015 website
