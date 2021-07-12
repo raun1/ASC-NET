@@ -1,6 +1,6 @@
-Network Architecture for the MICCAI_2021 paper : ASC-NET: Adversarial-based Selective Network for Unsupervised Anomaly Segmentation. To view the paper on Archive click the following https://arxiv.org/pdf/2103.03664.pdf
+ # ASC-NET [MICCAI 2021] https://arxiv.org/pdf/2103.03664.pdf
 
-![alt text](img/ASCnet.PNG)
+
 ## ASC Net summary
 
 ### Introduction
@@ -12,6 +12,10 @@ ASC-Net is a framework which allows us to <strong>define a Reference Distributio
 2. No need of perfect reconstruction. We care about the anomaly not the reconstruction unlike other existing algorithms.
 3. We can potentially define any manifold using Reference Distribution and then compare any incoming input image to it.
 4. Works on any image sizes. Simply adjust the size of the encoder/decoder sets to match your input size and hardware capacity.
+
+### Network Architecture
+
+![alt text](img/ASCnet.PNG)
 
 ### High level Summary 
 
