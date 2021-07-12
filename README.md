@@ -72,7 +72,7 @@ https://arxiv.org/pdf/2103.03664.pdf
 
 - create_networks.py 
     > This creates the network mentioned in our paper. If you need a network with different architecture please edit this file accordingly and update the baseline structures of the encoder/decoder. Try to keep the final connections intact. 
-    After running this you will obtain three h5 files 
+    - After running this you will obtain three h5 files 
         - disjoint_un_sup_mse_generator.h5 : This is the main module in the network diagram above
         - disjoint_un_sup_mse_discriminator.h5 : This is the discriminator in the network diagram above
         - disjoint_un_sup_mse_complete_gans.h5 : This is a completed version of the entire network diagram
