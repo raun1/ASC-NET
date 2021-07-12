@@ -41,7 +41,7 @@ https://arxiv.org/pdf/2103.03664.pdf
 * [MS-SEG 2015](https://smart-stats-tools.org/lesion-challenge) - MS-SEG2015 website
 * [12 gb TitanX]
 
-### Code Summary [Short Video. I havent YET commented the code so watch this :> for a walkthrough]
+### Code Summary [Short Video. I havent YET commented the code so watch this for a walkthrough :>]
 
 
 [![Click for a short vid](img/YT.PNG)](https://www.youtube.com/watch?v=bkhRGjz_KfA)
