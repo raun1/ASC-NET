@@ -43,13 +43,12 @@ https://arxiv.org/pdf/2103.03664.pdf
 
 ### Code Summary [Short Video]
 
-To be completed
 
 [![Click for a short vid](img/YT.PNG)](https://www.youtube.com/watch?v=oUeBNOYOheg)
 
 
 
-### Data Files
+### Data Files/Inputs
 
 1. To make the frame work function we require 2 files [Mandatory!!!!]
     - Reference Distribution - Named ***good_dic_to_train_disc.npy*** for our code 
@@ -66,14 +65,24 @@ To be completed
 #### Initial Conditions
 
 - The framework is initialized with input shape 160x160x1 for MS-SEG experiments. Please update this accordingly
+- Update the path variables for the folders in case you want to visualize the network output while training it
+- To change the base network please change the build_generator and build_discriminator methods
 
 #### File Sequence to Run
 
 - create_networks.py 
-> This creates the network mentioned in our paper. If you need a network with different architecture please edit this file accordingly and update the baseline structures of the encoder/decoder. Try to keep the final connections intact. 
+    > This creates the network mentioned in our paper. If you need a network with different architecture please edit this file accordingly and update the baseline structures of the encoder/decoder. Try to keep the final connections intact. 
+    After running this you will obtain three h5 files 
+        - disjoint_un_sup_mse_generator.h5 : This is the main module in the network diagram above
+        - disjoint_un_sup_mse_discriminator.h5 : This is the discriminator in the network diagram above
+        - disjoint_un_sup_mse_complete_gans.h5 : This is a completed version of the entire network diagram
+
 
 - continue_training_stage_1.py
-> Stage 1 training. Read the paper!
+    > Stage 1 training. Read the paper!
 
 - continue_training_stage_2.py
-> Stage 2 training. Read the paper!
+    > Stage 2 training. Read the paper!
+
+### Results 
+
