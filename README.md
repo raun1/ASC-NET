@@ -23,10 +23,10 @@ https://arxiv.org/pdf/2103.03664.pdf
 
 [![Click for a short vid](img/YT.PNG)](https://www.youtube.com/watch?v=oUeBNOYOheg)
 
-### Exception to the rule
+### Important
 
-***Always take threshold on the reconstruction i.e. ID3 in the code section*** Watch the following video for an explanation 
-Add vid tom !
+***Always take threshold on the reconstruction i.e. ID3 in the code section*** 
+
 
 ## Code
 
