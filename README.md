@@ -23,6 +23,10 @@ https://arxiv.org/pdf/2103.03664.pdf
 
 [![Click for a short vid](img/YT.PNG)](https://www.youtube.com/watch?v=oUeBNOYOheg)
 
+### Exception to the rule
+
+***Always take threshold on the reconstruction i.e. ID3 in the code section*** Watch the following video for an explanation 
+Add vid tom !
 
 ## Code
 
@@ -48,12 +52,11 @@ https://arxiv.org/pdf/2103.03664.pdf
 
 ### Comments 
 
-***Exception to the rule***
+
 
 - ID1 is Ifc
 - ID2 is Iwc
-- ID3 is Reconstruction. ***Please take threshold on this*** Watch the following video to undertand why
-add vid !
+- ID3 is Reconstruction. ***Please take threshold on this*** 
 
 ### Data Files/Inputs
 
