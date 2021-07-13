@@ -44,7 +44,7 @@ https://arxiv.org/pdf/2103.03664.pdf
 ### Code Summary [Short Video. I havent YET commented the code so watch this for a walkthrough :>]
 
 
-[![Click for a short vid](img/YT.PNG)](https://www.youtube.com/watch?v=bkhRGjz_KfA)
+[![Click for a short vid](img/YT.PNG)](https://www.youtube.com/watch?v=F53Grnmnpz0)
 
 
 
