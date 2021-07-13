@@ -46,7 +46,11 @@ https://arxiv.org/pdf/2103.03664.pdf
 
 [![Click for a short vid](img/YT.PNG)](https://www.youtube.com/watch?v=F53Grnmnpz0)
 
+### Comments 
 
+- ID1 is Ifc
+- ID2 is Iwc
+- ID3 is Reconstruction. Please take threshold on this
 
 ### Data Files/Inputs
 
