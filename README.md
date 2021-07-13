@@ -25,7 +25,7 @@ https://arxiv.org/pdf/2103.03664.pdf
 
 ### Important
 
-***Always take threshold on the reconstruction i.e. ID3 in the code section*** 
+***Always take threshold on the reconstruction i.e. ID3 in the code section as it summarizes the two cuts in one place*** 
 
 
 ## Code
