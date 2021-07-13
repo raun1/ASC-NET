@@ -56,7 +56,7 @@ Add vid tom !
 
 - ID1 is Ifc
 - ID2 is Iwc
-- ID3 is Reconstruction. ***Please take threshold on this*** 
+- ID3 is Iro. ***Please take threshold on this*** 
 
 ### Data Files/Inputs
 
