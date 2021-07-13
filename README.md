@@ -48,9 +48,12 @@ https://arxiv.org/pdf/2103.03664.pdf
 
 ### Comments 
 
+***Exception to the rule***
+
 - ID1 is Ifc
 - ID2 is Iwc
-- ID3 is Reconstruction. Please take threshold on this
+- ID3 is Reconstruction. ***Please take threshold on this*** Watch the following video to undertand why
+add vid !
 
 ### Data Files/Inputs
 
