@@ -13,7 +13,7 @@ https://arxiv.org/pdf/2103.03664.pdf
 2. No need of perfect reconstruction. We care about the anomaly not the reconstruction unlike other existing algorithms. State of the art performance!
 3. We can potentially define any manifold using Reference Distribution and then compare any incoming input image to it. 
 4. Works on any image sizes. Simply adjust the size of the encoder/decoder sets to match your input size and hardware capacity. 
-5. ***The claim of "indipendent of instability of GANs" holds since the final termination is not dependent on the adversarial training. We terminate when the I(ro) output has split into distinct peaks. i.e. at each time do a stage of discriminator/main module cycle, go check the I(ro) if peak seperation obtained terminate training.***
+5. ***The claim of "independent of instability of GANs" holds since the final termination is not dependent on the adversarial training. We terminate when the I(ro) output has split into distinct peaks. i.e. at each time do a stage of discriminator/main module cycle, go check the I(ro) if peak seperation obtained terminate training.***
 
 ### Network Architecture
 
