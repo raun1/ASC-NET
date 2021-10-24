@@ -35,9 +35,9 @@ def special_loss_disjoint(y_true,y_pred):
 	
 	y_true,y_pred=tf.split(y_pred, 2,axis=-1)
 	
-	thresholded_pred = tf.where( tf.greater(  0.0000000000000001,y_pred ), 1 * tf.ones_like( y_pred ), y_pred )#where(cond : take true values : take false values)
+	thresholded_pred = tf.where( tf.greater( 0.0000000000000001, y_pred ), 1 * tf.ones_like( y_pred ), y_pred )#where(cond : take true values : take false values)
 	
-	thresholded_true=tf.where( tf.greater(  0.0000000000000001,y_true ), 1 * tf.ones_like( y_true ), y_true )
+	thresholded_true=tf.where( tf.greater( 0.0000000000000001, y_true ), 1 * tf.ones_like( y_true ), y_true )
 	
 	return dice_coef(thresholded_true,thresholded_pred)
 
@@ -51,6 +51,7 @@ def dice_coef_loss(y_true, y_pred):
 	return dice_coef(y_true, y_pred)
 
 ################################################################################################
+
 
 
 def build_discriminator(input_shape,learn_rate=1e-3):
@@ -159,9 +160,6 @@ def build_discriminator(input_shape,learn_rate=1e-3):
 	#model.summary()
 	return model
 
-
-
-
 input_shape=160,160,1
 
 from keras.models import load_model
@@ -225,6 +223,8 @@ print("=========================================================================
 
 def train_disc(real_data,fake_data,true_label,ep,loss_ch):
 
+	discriminator=build_discriminator(input_shape)
+	discriminator.name='model_2'
 	for layer in discriminator.layers: layer.trainable = False
 	generator.compile(optimizer=keras.optimizers.Adam(lr=5e-5),loss={
 	                                            
@@ -238,23 +238,21 @@ def train_disc(real_data,fake_data,true_label,ep,loss_ch):
 	        metrics=['accuracy'])
 
 	final_input=generator.input
+	
 
-
-
+	
 	x_u_net_opsp=(generator.get_layer('x_u_net_opsp').output)
 	final_output_gans=discriminator(generator.get_layer('new_final_op').output)
 	final_output_seg=(generator.get_layer('new_xfinal_op').output)
 	final_output_res=(generator.get_layer('new_res_1_final_opa').output)
 
-	#final_model.add(generator)
-	#final_model.add(discriminator)
 	final_model=Model(inputs=[final_input],outputs=[final_output_gans,final_output_seg,final_output_res,x_u_net_opsp])
 
 	final_model.compile(optimizer=keras.optimizers.Adam(lr=5e-5),metrics=['mae'],loss={'model_2':'mae',
 																							
 																							'new_res_1_final_opa':'mse',
-																						'x_u_net_opsp':special_loss_disjoint})	
-
+																							'x_u_net_opsp':special_loss_disjoint})
+		
 	for layer in discriminator.layers: layer.trainable = True
 	
 
@@ -328,8 +326,8 @@ def train_generator(true_label,ep,loss_ch):
 	for layer in discriminator.layers: layer.trainable = False
 	
 
-	generator.compile(optimizer=keras.optimizers.Adam(lr=5e-5),loss={#'new_final_op':neg_custom_mae,
-                                            #'new_xfinal_op':custom_mae,
+	generator.compile(optimizer=keras.optimizers.Adam(lr=5e-5),loss={
+                                            
                                             'new_res_1_final_opa':'mse',
                                             'x_u_net_opsp':special_loss_disjoint
                                             
@@ -338,14 +336,11 @@ def train_generator(true_label,ep,loss_ch):
 	discriminator.compile(loss='mae',
 	        optimizer=keras.optimizers.Adam(lr=5e-5),
 	        metrics=['accuracy'])
-
-	
 	final_model.compile(optimizer=keras.optimizers.Adam(lr=5e-5),metrics=['accuracy'],loss={'model_2':'mae',
-																							#'new_xfinal_op':custom_mae,
+																							
 																							'new_res_1_final_opa':'mse',
 																							'x_u_net_opsp':special_loss_disjoint})
 
-	
 	multi_final_model=multi_gpu_model(final_model,gpus=4)
 	multi_final_model.compile(optimizer=keras.optimizers.Adam(lr=5e-5),metrics=['accuracy'],loss={'model_2':'mae',
 																							
@@ -382,7 +377,7 @@ def train_generator(true_label,ep,loss_ch):
 			cv2.imwrite("outputs/norm/id1/"+str(i)+".png",(result[0][i])*255)
 			cv2.imwrite("outputs/norm/id2/"+str(i)+".png",(result[1][i])*255)
 			cv2.imwrite("outputs/norm/id3/"+str(i)+".png",(result[2][i])*255)
-			cv2.imwrite("outputs/norm/input/"+str(i)+".png",(X_train[i])*255)
+			cv2.imwrite("outputs/norm/in/"+str(i)+".png",(X_train[i])*255)
 		#final_model.fit([X_train],[y_train,X_train,y_empty],batch_size=16,nb_epoch=ep,shuffle=True)
 	return
 
@@ -390,7 +385,40 @@ while(True):
 	i_p=(int)(raw_input("press 0 to train disc and 1 to train gen 2 to save models 3 to check outputs anything else to quit"))
 
 	if(i_p==0):
-		
+		#'''
+		discriminator=build_discriminator(input_shape)
+		discriminator.name='model_2'
+		for layer in discriminator.layers: layer.trainable = False
+		generator.compile(optimizer=keras.optimizers.Adam(lr=5e-5),loss={
+		                                            
+		                                            'new_res_1_final_opa':'mse',
+		                                            'x_u_net_opsp':special_loss_disjoint
+		                                            
+		                                            })
+
+		discriminator.compile(loss='mae',
+		        optimizer=keras.optimizers.Adam(lr=5e-5),
+		        metrics=['accuracy'])
+
+		#discriminator.trainable=False
+		final_input=generator.input
+		#final_input_1=discriminator.input
+		#connect the two
+
+		#discriminator.input=generator.get_layer('output_gen').output
+		x_u_net_opsp=(generator.get_layer('x_u_net_opsp').output)
+		final_output_gans=discriminator(generator.get_layer('new_final_op').output)
+		final_output_seg=(generator.get_layer('new_xfinal_op').output)
+		final_output_res=(generator.get_layer('new_res_1_final_opa').output)
+
+		#final_model.add(generator)
+		#final_model.add(discriminator)
+		final_model=Model(inputs=[final_input],outputs=[final_output_gans,final_output_seg,final_output_res,x_u_net_opsp])
+
+		final_model.compile(optimizer=keras.optimizers.Adam(lr=5e-5),metrics=['mae'],loss={'model_2':'mae',
+																								
+																								'new_res_1_final_opa':'mse',
+																								'x_u_net_opsp':special_loss_disjoint})
 		loss_ch=0
 		#'''
 		print ("training disc")
@@ -457,8 +485,8 @@ while(True):
 			cv2.imwrite("outputs/id2/"+str(i)+".png",(result[1][i])*255)
 			cv2.imwrite("outputs/id3/"+str(i)+".png",(result[2][i])*255)
 			
-			cv2.imwrite("outputs/norm/input/"+str(i)+".png",X_train[i]*255)
-			cv2.imwrite("outputs/norm/output/"+str(i)+".png",y_train[i]*255)
+			cv2.imwrite("outputs/norm/in/"+str(i)+".png",X_train[i]*255)
+			cv2.imwrite("outputs/norm/op/"+str(i)+".png",y_train[i]*255)
 
 
 		result[1]=(result[1]-np.amin(result[1]))/((np.amax(result[1]))-(np.amin(result[1])))
@@ -471,7 +499,6 @@ while(True):
 		
 	else:
 		break
-
 
 
 
