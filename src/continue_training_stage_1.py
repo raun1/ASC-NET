@@ -194,8 +194,8 @@ def train_generator(true_label,ep,loss_ch):
 	for layer in discriminator.layers: layer.trainable = False
 	
 
-	generator.compile(optimizer=keras.optimizers.Adam(lr=5e-5),loss={
-                                            
+	generator.compile(optimizer=keras.optimizers.Adam(lr=5e-5),loss={#'new_final_op':neg_custom_mae,
+                                            #'new_xfinal_op':custom_mae,
                                             'new_res_1_final_opa':'mse',
                                             'x_u_net_opsp':special_loss_disjoint
                                             
@@ -204,11 +204,23 @@ def train_generator(true_label,ep,loss_ch):
 	discriminator.compile(loss='mae',
 	        optimizer=keras.optimizers.Adam(lr=5e-5),
 	        metrics=['accuracy'])
+
+	final_input=generator.input
+	x_u_net_opsp=(generator.get_layer('x_u_net_opsp').output)
+	final_output_gans=discriminator(generator.get_layer('new_final_op').output)
+	final_output_seg=(generator.get_layer('new_xfinal_op').output)
+	final_output_res=(generator.get_layer('new_res_1_final_opa').output)
+
+	#final_model.add(generator)
+	#final_model.add(discriminator)
+	final_model=Model(inputs=[final_input],outputs=[final_output_gans,final_output_seg,final_output_res,x_u_net_opsp])
+
 	final_model.compile(optimizer=keras.optimizers.Adam(lr=5e-5),metrics=['accuracy'],loss={'model_2':'mae',
-																							
+																							#'new_xfinal_op':custom_mae,
 																							'new_res_1_final_opa':'mse',
 																							'x_u_net_opsp':special_loss_disjoint})
 
+	
 	multi_final_model=multi_gpu_model(final_model,gpus=4)
 	multi_final_model.compile(optimizer=keras.optimizers.Adam(lr=5e-5),metrics=['accuracy'],loss={'model_2':'mae',
 																							
@@ -253,40 +265,7 @@ while(True):
 	i_p=(int)(raw_input("press 0 to train disc and 1 to train gen 2 to save models 3 to check outputs anything else to quit"))
 
 	if(i_p==0):
-		#'''
-		discriminator=build_discriminator(input_shape)
-		discriminator.name='model_2'
-		for layer in discriminator.layers: layer.trainable = False
-		generator.compile(optimizer=keras.optimizers.Adam(lr=5e-5),loss={
-		                                            
-		                                            'new_res_1_final_opa':'mse',
-		                                            'x_u_net_opsp':special_loss_disjoint
-		                                            
-		                                            })
-
-		discriminator.compile(loss='mae',
-		        optimizer=keras.optimizers.Adam(lr=5e-5),
-		        metrics=['accuracy'])
-
-		#discriminator.trainable=False
-		final_input=generator.input
-		#final_input_1=discriminator.input
-		#connect the two
-
-		#discriminator.input=generator.get_layer('output_gen').output
-		x_u_net_opsp=(generator.get_layer('x_u_net_opsp').output)
-		final_output_gans=discriminator(generator.get_layer('new_final_op').output)
-		final_output_seg=(generator.get_layer('new_xfinal_op').output)
-		final_output_res=(generator.get_layer('new_res_1_final_opa').output)
-
-		#final_model.add(generator)
-		#final_model.add(discriminator)
-		final_model=Model(inputs=[final_input],outputs=[final_output_gans,final_output_seg,final_output_res,x_u_net_opsp])
-
-		final_model.compile(optimizer=keras.optimizers.Adam(lr=5e-5),metrics=['mae'],loss={'model_2':'mae',
-																								
-																								'new_res_1_final_opa':'mse',
-																								'x_u_net_opsp':special_loss_disjoint})
+		
 		loss_ch=0
 		#'''
 		print ("training disc")
