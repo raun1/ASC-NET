@@ -35,9 +35,9 @@ def special_loss_disjoint(y_true,y_pred):
 	
 	y_true,y_pred=tf.split(y_pred, 2,axis=-1)
 	
-	thresholded_pred = tf.where( tf.greater(  y_pred,0.0000000000000001 ), 1 * tf.ones_like( y_pred ), y_pred )#where(cond : take true values : take false values)
+	thresholded_pred = tf.where( tf.greater(  0.0000000000000001,y_pred ), 1 * tf.ones_like( y_pred ), y_pred )#where(cond : take true values : take false values)
 	
-	thresholded_true=tf.where( tf.greater(  y_true,0.0000000000000001 ), 1 * tf.ones_like( y_true ), y_true )
+	thresholded_true=tf.where( tf.greater(  0.0000000000000001,y_true ), 1 * tf.ones_like( y_true ), y_true )
 	
 	return dice_coef(thresholded_true,thresholded_pred)
 
@@ -119,7 +119,35 @@ print("=========================================================================
 
 def train_disc(real_data,fake_data,true_label,ep,loss_ch):
 
-	
+	for layer in discriminator.layers: layer.trainable = False
+	generator.compile(optimizer=keras.optimizers.Adam(lr=5e-5),loss={
+	                                            
+	                                            'new_res_1_final_opa':'mse',
+	                                            'x_u_net_opsp':special_loss_disjoint
+	                                            
+	                                            })
+
+	discriminator.compile(loss='mae',
+	        optimizer=keras.optimizers.Adam(lr=5e-5),
+	        metrics=['accuracy'])
+
+	final_input=generator.input
+
+
+
+	x_u_net_opsp=(generator.get_layer('x_u_net_opsp').output)
+	final_output_gans=discriminator(generator.get_layer('new_final_op').output)
+	final_output_seg=(generator.get_layer('new_xfinal_op').output)
+	final_output_res=(generator.get_layer('new_res_1_final_opa').output)
+
+	#final_model.add(generator)
+	#final_model.add(discriminator)
+	final_model=Model(inputs=[final_input],outputs=[final_output_gans,final_output_seg,final_output_res,x_u_net_opsp])
+
+	final_model.compile(optimizer=keras.optimizers.Adam(lr=5e-5),metrics=['mae'],loss={'model_2':'mae',
+																							
+																							'new_res_1_final_opa':'mse',
+																						'x_u_net_opsp':special_loss_disjoint})	
 
 	for layer in discriminator.layers: layer.trainable = True
 	
@@ -145,7 +173,7 @@ def train_disc(real_data,fake_data,true_label,ep,loss_ch):
 	discriminator.summary()
 	
 	
-	y_train_true=np.ones(shape=len(real_data))
+	y_train_true=-np.ones(shape=len(real_data))
 	y_train_true=y_train_true#-0.1
 	print(y_train_true.shape)
 
@@ -153,7 +181,7 @@ def train_disc(real_data,fake_data,true_label,ep,loss_ch):
 
 
 
-	y_train_fake=-np.ones(shape=len(fake_data))
+	y_train_fake=np.ones(shape=len(fake_data))
 	y_train_fake=y_train_fake#-0.1
 	
 	real_data=(list)(real_data)
@@ -229,7 +257,7 @@ def train_generator(true_label,ep,loss_ch):
 
 	for j in range(0,len(X_train)):
 		
-		y_train.append(1)
+		y_train.append(-1)
 	y_train=np.array(y_train)
 	#print(multi_final_model.summary())
 	y_empty=np.zeros(shape=(X_train.shape))
