@@ -223,36 +223,7 @@ print("=========================================================================
 
 def train_disc(real_data,fake_data,true_label,ep,loss_ch):
 
-	discriminator=build_discriminator(input_shape)
-	discriminator.name='model_2'
-	for layer in discriminator.layers: layer.trainable = False
-	generator.compile(optimizer=keras.optimizers.Adam(lr=5e-5),loss={
-	                                            
-	                                            'new_res_1_final_opa':'mse',
-	                                            'x_u_net_opsp':special_loss_disjoint
-	                                            
-	                                            })
-
-	discriminator.compile(loss='mae',
-	        optimizer=keras.optimizers.Adam(lr=5e-5),
-	        metrics=['accuracy'])
-
-	final_input=generator.input
 	
-
-	
-	x_u_net_opsp=(generator.get_layer('x_u_net_opsp').output)
-	final_output_gans=discriminator(generator.get_layer('new_final_op').output)
-	final_output_seg=(generator.get_layer('new_xfinal_op').output)
-	final_output_res=(generator.get_layer('new_res_1_final_opa').output)
-
-	final_model=Model(inputs=[final_input],outputs=[final_output_gans,final_output_seg,final_output_res,x_u_net_opsp])
-
-	final_model.compile(optimizer=keras.optimizers.Adam(lr=5e-5),metrics=['mae'],loss={'model_2':'mae',
-																							
-																							'new_res_1_final_opa':'mse',
-																							'x_u_net_opsp':special_loss_disjoint})
-		
 	for layer in discriminator.layers: layer.trainable = True
 	
 
@@ -378,7 +349,7 @@ def train_generator(true_label,ep,loss_ch):
 			cv2.imwrite("outputs/norm/id1/"+str(i)+".png",(result[0][i])*255)
 			cv2.imwrite("outputs/norm/id2/"+str(i)+".png",(result[1][i])*255)
 			cv2.imwrite("outputs/norm/id3/"+str(i)+".png",(result[2][i])*255)
-			cv2.imwrite("outputs/norm/in/"+str(i)+".png",(X_train[i])*255)
+			cv2.imwrite("outputs/norm/input/"+str(i)+".png",(X_train[i])*255)
 		#final_model.fit([X_train],[y_train,X_train,y_empty],batch_size=16,nb_epoch=ep,shuffle=True)
 	return
 
@@ -486,8 +457,8 @@ while(True):
 			cv2.imwrite("outputs/id2/"+str(i)+".png",(result[1][i])*255)
 			cv2.imwrite("outputs/id3/"+str(i)+".png",(result[2][i])*255)
 			
-			cv2.imwrite("outputs/norm/in/"+str(i)+".png",X_train[i]*255)
-			cv2.imwrite("outputs/norm/op/"+str(i)+".png",y_train[i]*255)
+			cv2.imwrite("outputs/norm/input/"+str(i)+".png",X_train[i]*255)
+			cv2.imwrite("outputs/norm/output/"+str(i)+".png",y_train[i]*255)
 
 
 		result[1]=(result[1]-np.amin(result[1]))/((np.amax(result[1]))-(np.amin(result[1])))
