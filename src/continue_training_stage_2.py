@@ -359,7 +359,7 @@ def train_generator(true_label,ep,loss_ch):
 
 	for j in range(0,len(X_train)):
 		
-		y_train.append(-1)
+		y_train.append(1)
 	y_train=np.array(y_train)
 	#print(multi_final_model.summary())
 	y_empty=np.zeros(shape=(X_train.shape))
