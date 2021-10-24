@@ -205,16 +205,7 @@ def train_generator(true_label,ep,loss_ch):
 	        optimizer=keras.optimizers.Adam(lr=5e-5),
 	        metrics=['accuracy'])
 
-	final_input=generator.input
-	x_u_net_opsp=(generator.get_layer('x_u_net_opsp').output)
-	final_output_gans=discriminator(generator.get_layer('new_final_op').output)
-	final_output_seg=(generator.get_layer('new_xfinal_op').output)
-	final_output_res=(generator.get_layer('new_res_1_final_opa').output)
-
-	#final_model.add(generator)
-	#final_model.add(discriminator)
-	final_model=Model(inputs=[final_input],outputs=[final_output_gans,final_output_seg,final_output_res,x_u_net_opsp])
-
+	
 	final_model.compile(optimizer=keras.optimizers.Adam(lr=5e-5),metrics=['accuracy'],loss={'model_2':'mae',
 																							#'new_xfinal_op':custom_mae,
 																							'new_res_1_final_opa':'mse',
