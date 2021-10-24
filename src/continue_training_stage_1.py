@@ -54,111 +54,7 @@ def dice_coef_loss(y_true, y_pred):
 
 
 
-def build_discriminator(input_shape,learn_rate=1e-3):
-	l2_lambda = 0.0002
-	DropP = 0.3
-	kernel_size=3
 
-	inputs = Input(input_shape,name="disc_ip")
-
-	conv0a = Conv2D( 32, (kernel_size, kernel_size), activation='relu', padding='same', 
-	               kernel_regularizer=regularizers.l2(l2_lambda),name='disc_l2_conc15' )(inputs)
-
-
-	conv0a = bn(name='disc_l2_bn1')(conv0a)
-
-	conv0b = Conv2D(32, (kernel_size, kernel_size), activation='relu', padding='same',
-	               kernel_regularizer=regularizers.l2(l2_lambda),name='disc_l2_conc16' )(conv0a)
-
-	conv0b = bn(name='disc_l2_bn2')(conv0b)
-
-
-
-
-	pool0 = MaxPooling2D(pool_size=(2, 2),name='disc_l2_mp1')(conv0b)
-
-	pool0 = Dropout(DropP,name='disc_l2_d1')(pool0)
-
-
-
-
-
-
-	conv2a = Conv2D(64, (kernel_size, kernel_size), activation='relu', padding='same',
-	               kernel_regularizer=regularizers.l2(l2_lambda),name='disc_l2_conc17' )(pool0)
-
-	conv2a = bn(name='disc_l2_bn3')(conv2a)
-
-	conv2b = Conv2D(64, (kernel_size, kernel_size), activation='relu', padding='same',
-	               kernel_regularizer=regularizers.l2(l2_lambda) ,name='disc_l2_conc18')(conv2a)
-
-	conv2b = bn(name='disc_l2_bn4')(conv2b)
-
-	pool2 = MaxPooling2D(pool_size=(2, 2),name='disc_l2_mp2')(conv2b)
-
-	pool2 = Dropout(DropP,name='disc_l2_d2')(pool2)
-
-
-
-
-
-
-
-	conv3a = Conv2D(128, (kernel_size, kernel_size), activation='relu', padding='same',
-	               kernel_regularizer=regularizers.l2(l2_lambda),name='disc_l2_conc19' )(pool2)
-
-	conv3a = bn(name='disc_l2_bn5')(conv3a)
-
-	conv3b = Conv2D(128, (kernel_size, kernel_size), activation='relu', padding='same',
-	               kernel_regularizer=regularizers.l2(l2_lambda) ,name='disc_l2_conc20')(conv3a)
-
-	conv3b = bn(name='disc_l2_bn6')(conv3b)
-
-
-
-	pool3 = MaxPooling2D(pool_size=(2, 2),name='disc_l2_mp3')(conv3b)
-
-	pool3 = Dropout(DropP,name='disc_l2_d3')(pool3)
-
-
-	conv4a = Conv2D(256, (kernel_size, kernel_size), activation='relu', padding='same',
-	               kernel_regularizer=regularizers.l2(l2_lambda),name='disc_l2_conc21' )(pool3)
-
-	conv4a = bn(name='disc_l2_bn7')(conv4a)
-
-	conv4b = Conv2D(256, (kernel_size, kernel_size), activation='relu', padding='same',
-	               kernel_regularizer=regularizers.l2(l2_lambda),name='disc_l2_conc22' )(conv4a)
-
-	conv4b = bn(name='disc_l2_bn8')(conv4b)
-
-	pool4 = MaxPooling2D(pool_size=(2, 2),name='disc_l2_mp4')(conv4b)
-
-	pool4 = Dropout(DropP,name='disc_l2_d4')(pool4)
-
-
-
-
-
-	conv5a = Conv2D(512, (kernel_size, kernel_size), activation='relu', padding='same',
-	               kernel_regularizer=regularizers.l2(l2_lambda) ,name='disc_l2_conc23')(pool4)
-
-	conv5a = bn(name='disc_l2_bn9')(conv5a)
-
-	conv5b = Conv2D(512, (kernel_size, kernel_size), activation='relu', padding='same',
-	               kernel_regularizer=regularizers.l2(l2_lambda) ,name='disc_l2_conc24')(conv5a)
-
-	conv5b = bn(name='disc_l2_bn10')(conv5b)
-
-	flat=Flatten()(conv5b)
-
-	output_disc=Dense(1,activation='tanh',name='disc_output')(flat)#placeholder
-
-	model=Model(inputs=[inputs],outputs=[output_disc])
-	model.compile(loss='mae',
-	        optimizer=keras.optimizers.Adam(lr=5e-5),
-	        metrics=['accuracy'])
-	#model.summary()
-	return model
 
 input_shape=160,160,1
 
@@ -223,36 +119,8 @@ print("=========================================================================
 
 def train_disc(real_data,fake_data,true_label,ep,loss_ch):
 
-	discriminator=build_discriminator(input_shape)
-	discriminator.name='model_2'
-	for layer in discriminator.layers: layer.trainable = False
-	generator.compile(optimizer=keras.optimizers.Adam(lr=5e-5),loss={
-	                                            
-	                                            'new_res_1_final_opa':'mse',
-	                                            'x_u_net_opsp':special_loss_disjoint
-	                                            
-	                                            })
-
-	discriminator.compile(loss='mae',
-	        optimizer=keras.optimizers.Adam(lr=5e-5),
-	        metrics=['accuracy'])
-
-	final_input=generator.input
 	
 
-	
-	x_u_net_opsp=(generator.get_layer('x_u_net_opsp').output)
-	final_output_gans=discriminator(generator.get_layer('new_final_op').output)
-	final_output_seg=(generator.get_layer('new_xfinal_op').output)
-	final_output_res=(generator.get_layer('new_res_1_final_opa').output)
-
-	final_model=Model(inputs=[final_input],outputs=[final_output_gans,final_output_seg,final_output_res,x_u_net_opsp])
-
-	final_model.compile(optimizer=keras.optimizers.Adam(lr=5e-5),metrics=['mae'],loss={'model_2':'mae',
-																							
-																							'new_res_1_final_opa':'mse',
-																							'x_u_net_opsp':special_loss_disjoint})
-		
 	for layer in discriminator.layers: layer.trainable = True
 	
 
@@ -377,7 +245,7 @@ def train_generator(true_label,ep,loss_ch):
 			cv2.imwrite("outputs/norm/id1/"+str(i)+".png",(result[0][i])*255)
 			cv2.imwrite("outputs/norm/id2/"+str(i)+".png",(result[1][i])*255)
 			cv2.imwrite("outputs/norm/id3/"+str(i)+".png",(result[2][i])*255)
-			cv2.imwrite("outputs/norm/in/"+str(i)+".png",(X_train[i])*255)
+			cv2.imwrite("outputs/norm/input/"+str(i)+".png",(X_train[i])*255)
 		#final_model.fit([X_train],[y_train,X_train,y_empty],batch_size=16,nb_epoch=ep,shuffle=True)
 	return
 
@@ -485,8 +353,8 @@ while(True):
 			cv2.imwrite("outputs/id2/"+str(i)+".png",(result[1][i])*255)
 			cv2.imwrite("outputs/id3/"+str(i)+".png",(result[2][i])*255)
 			
-			cv2.imwrite("outputs/norm/in/"+str(i)+".png",X_train[i]*255)
-			cv2.imwrite("outputs/norm/op/"+str(i)+".png",y_train[i]*255)
+			cv2.imwrite("outputs/norm/input/"+str(i)+".png",X_train[i]*255)
+			cv2.imwrite("outputs/norm/output/"+str(i)+".png",y_train[i]*255)
 
 
 		result[1]=(result[1]-np.amin(result[1]))/((np.amax(result[1]))-(np.amin(result[1])))
