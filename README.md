@@ -1,4 +1,4 @@
-# If you have downloaded the code before october 23rd 2021 there was a bug where the main module was converting the input image to fake (-1) This results in the Ifc branch always creating empty images
+
 ## ASC Net summary 
 
 ### Introduction
