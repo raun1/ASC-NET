@@ -277,7 +277,7 @@ def train_disc(real_data,fake_data,true_label,ep,loss_ch):
 	discriminator.summary()
 	
 	
-	y_train_true=-np.ones(shape=len(real_data))
+	y_train_true=np.ones(shape=len(real_data))
 	y_train_true=y_train_true#-0.1
 	print(y_train_true.shape)
 
@@ -285,7 +285,7 @@ def train_disc(real_data,fake_data,true_label,ep,loss_ch):
 
 
 
-	y_train_fake=np.ones(shape=len(fake_data))
+	y_train_fake=-np.ones(shape=len(fake_data))
 	y_train_fake=y_train_fake#-0.1
 	
 	real_data=(list)(real_data)
