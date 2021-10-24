@@ -1,4 +1,5 @@
-## ASC Net summary
+# If you have downloaded the code before october 23rd 2021 there was a bug where the main module was converting the input image to fake (-1) This results in the Ifc branch always creating empty images
+## ASC Net summary 
 
 ### Introduction
 ASC-Net is a framework which allows us to <strong>define a Reference Distribution Set</strong> and then take in <strong>any Input Image</strong> and <strong>compare with the Reference Distribution</strong> and <strong>throw out anomalies</strong> present in the Input Image. The kind of cases where this is useful is when you have some images/signals where you are aware of its contents and then you get a set of new images and you want to see if the new images differ from the original set aka anomaly/novelty detection.
