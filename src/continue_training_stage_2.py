@@ -35,9 +35,9 @@ def special_loss_disjoint(y_true,y_pred):
 	
 	y_true,y_pred=tf.split(y_pred, 2,axis=-1)
 	
-	thresholded_pred = tf.where( tf.greater( 0.0000000000000001, y_pred ), 1 * tf.ones_like( y_pred ), y_pred )#where(cond : take true values : take false values)
+	thresholded_pred = tf.where( tf.greater(  y_pred,0.0000000000000001), 1 * tf.ones_like( y_pred ), y_pred )#where(cond : take true values : take false values)
 	
-	thresholded_true=tf.where( tf.greater( 0.0000000000000001, y_true ), 1 * tf.ones_like( y_true ), y_true )
+	thresholded_true=tf.where( tf.greater(  y_true,0.0000000000000001 ), 1 * tf.ones_like( y_true ), y_true )
 	
 	return dice_coef(thresholded_true,thresholded_pred)
 
