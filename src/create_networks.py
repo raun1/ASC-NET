@@ -476,7 +476,7 @@ def build_discriminator(input_shape,learn_rate=1e-3):
 	return model
 
 
-input_shape=160,160,1
+input_shape=240,240,1
 #final_model = Sequential()
 
 generator=build_generator(input_shape)
