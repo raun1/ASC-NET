@@ -28,7 +28,7 @@ import cv2
 CUDA_VISIBLE_DEVICES = [0,1,2,3]
 os.environ['CUDA_VISIBLE_DEVICES']=','.join([str(x) for x in CUDA_VISIBLE_DEVICES])
 smooth=1.
-input_shape=160,160,1
+input_shape=240,240,1
 ########################################Losses#################################################
 def special_loss_disjoint(y_true,y_pred):
 	
@@ -159,7 +159,7 @@ def build_discriminator(input_shape,learn_rate=1e-3):
 	#model.summary()
 	return model
 
-input_shape=160,160,1
+input_shape=240,240,1
 
 from keras.models import load_model
 generator=load_model('disjoint_un_sup_mse_generator.h5', custom_objects={'dice_coef_loss':dice_coef_loss,'special_loss_disjoint':special_loss_disjoint})
